@@ -2,6 +2,7 @@
 
 const calculateDueDate = (submitDate, turnaroundTime) => {
   let dueDate = new Date(submitDate);
+  const hour = 3600000;
   const turnaroundHours = Math.floor(turnaroundTime);
   const turnaroundMinutes = Math.floor(60 * (turnaroundTime % 1));
   const turnaroundSeconds = Math.floor(3600 * (turnaroundTime % 1 - turnaroundMinutes / 60));
@@ -9,15 +10,12 @@ const calculateDueDate = (submitDate, turnaroundTime) => {
     (((dueDate.getHours() + turnaroundHours) === 17) &&
       ((dueDate.getMinutes() + turnaroundMinutes) === 0) &&
       ((dueDate.getSeconds() + turnaroundSeconds) === 0));
-
+  console.log(dueDate.getHours() + turnaroundHours)
   if (sameDay) {
 
-    dueDate.setHours(dueDate.getHours() + turnaroundHours);
-    dueDate.setMinutes(dueDate.getMinutes() + turnaroundMinutes);
-    dueDate.setSeconds(dueDate.getSeconds() + turnaroundSeconds);
+    dueDate.setTime(dueDate.getTime() + turnaroundTime * hour);
 
   } else {
-    const hour = 3600000;
     let sameDayEnd = new Date(submitDate);
     sameDayEnd.setTime(17 * hour)
 
@@ -28,7 +26,10 @@ const calculateDueDate = (submitDate, turnaroundTime) => {
 
 
   }
-  return dueDate.toISOString();
+  console.log({ sameDay, dueDate, turnaroundHours, turnaroundMinutes, turnaroundSeconds })
+  return dueDate.toString();
 }
+
+calculateDueDate('1995-12-18T16:00:00.000Z', 1);
 
 module.exports = calculateDueDate;
