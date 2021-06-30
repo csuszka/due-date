@@ -40,5 +40,5 @@ const calculateDueDate = (submitDate, turnaroundTime) => {
   }
   return dueDate.toString();
 }
-calculateDueDate('Mon Jun 28 2021 10:00:00 GMT+0200 (közép-európai nyári idő)', 16)
+
 module.exports = calculateDueDate;
