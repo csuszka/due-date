@@ -17,7 +17,7 @@ test('Ends exactly at the end of the workday, we expect no workday switches', ()
 });
 
 test('Submitted exactly at the beginning of the workday, 8 hours turnaround, we expect no workday switches', () => {
-  expect(dueDate('Mon Dec 18 1995 16:00:00 GMT+0100 (közép-európai téli idő)', 8)).toBe('Mon Dec 18 1995 17:00:00 GMT+0100 (közép-európai téli idő)');
+  expect(dueDate('Mon Dec 18 1995 09:00:00 GMT+0100 (közép-európai téli idő)', 8)).toBe('Mon Dec 18 1995 17:00:00 GMT+0100 (közép-európai téli idő)');
 });
 
 //Same week

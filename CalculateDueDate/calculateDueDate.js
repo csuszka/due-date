@@ -1,7 +1,7 @@
 'use strict';
 
 const calculateDueDate = (submitDate, turnaroundTime) => {
-  let dueDate = new Date(submitDate);
+  const dueDate = new Date(submitDate);
   const hour = 3600000;
   const day = 24 * hour;
   const turnaroundHours = Math.floor(turnaroundTime);
@@ -11,27 +11,35 @@ const calculateDueDate = (submitDate, turnaroundTime) => {
     (((dueDate.getHours() + turnaroundHours) === 17) &&
       ((dueDate.getMinutes() + turnaroundMinutes) === 0) &&
       ((dueDate.getSeconds() + turnaroundSeconds) === 0));
-  console.log(dueDate.getHours() + turnaroundHours)
+
   if (sameDay) {
 
     dueDate.setTime(dueDate.getTime() + turnaroundTime * hour);
 
   } else {
-    let sameDayEnd = new Date(submitDate);
-    sameDayEnd.setTime(17 * hour)
+    const sameDayEnd = new Date(submitDate);
+    sameDayEnd.setHours(17, 0, 0);
 
-    const remainingTurnaroundTime = turnaroundTime - (sameDayEnd - submitDate);
+    const remainingTurnaroundTime = turnaroundTime - (sameDayEnd.getTime() - dueDate.getTime()) / hour;
+    const dueHours = 9 + Math.floor(remainingTurnaroundTime % 8);
+    const dueMinutes = Math.floor(((remainingTurnaroundTime % 8) % 1) * 60);
+    const dueSeconds = Math.floor(((((remainingTurnaroundTime % 8) % 1) * 60) % 1) * 60);
 
-    dueDate.setDate(dueDate.getDate() + Math.floor(remainingTurnaroundTime / 8))
-    dueDate.setTime((9 + (remainingTurnaroundTime % 8)) * hour)
+    dueDate.setDate(dueDate.getDate() + Math.floor(remainingTurnaroundTime / 8));
+    dueDate.setHours(dueHours, dueMinutes, dueSeconds);
 
+    const saturday = dueDate.getDay() === 6;
+    const sunday = dueDate.getDay() === 0;
 
+    if (saturday) {
+      dueDate.setDate(dueDate.getDate() + 2);
+    }
+    if (sunday) {
+      dueDate.setDate(dueDate.getDate() + 1);
+    }
 
   }
-  console.log({ sameDay, dueDate, turnaroundHours, turnaroundMinutes, turnaroundSeconds })
   return dueDate.toString();
 }
-
-calculateDueDate('Thu Dec 31 2020 16:00:00 GMT+0100 (közép-európai téli idő)', 20);
 
 module.exports = calculateDueDate;
