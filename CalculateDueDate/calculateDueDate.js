@@ -24,8 +24,7 @@ const calculateDueDate = (submitDate, turnaroundTime) => {
     const dueHours = 9 + Math.floor(remainingTurnaroundTime % 8);
     const dueMinutes = Math.floor(((remainingTurnaroundTime % 8) % 1) * 60);
     const dueSeconds = Math.floor(((((remainingTurnaroundTime % 8) % 1) * 60) % 1) * 60);
-
-    dueDate.setDate(dueDate.getDate() + Math.floor(remainingTurnaroundTime / 8));
+    dueDate.setDate(dueDate.getDate() + Math.floor(remainingTurnaroundTime / 8 + 1));
     dueDate.setHours(dueHours, dueMinutes, dueSeconds);
 
     const saturday = dueDate.getDay() === 6;
@@ -41,5 +40,5 @@ const calculateDueDate = (submitDate, turnaroundTime) => {
   }
   return dueDate.toString();
 }
-
+calculateDueDate('Mon Jun 28 2021 10:00:00 GMT+0200 (közép-európai nyári idő)', 16)
 module.exports = calculateDueDate;
