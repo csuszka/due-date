@@ -55,3 +55,9 @@ test('Submitted in the morning, 16 hour turnaround', () => {
 test('Submitted in the morning, 16 hour turnaround', () => {
   expect(dueDate('Thu Dec 31 2020 16:00:00 GMT+0100 (közép-európai téli idő)', 20)).toBe('Tue Jan 05 2021 12:00:00 GMT+0100 (közép-európai téli idő)');
 });
+
+//Daylight savings
+
+test('Submitted in the morning, 16 hour turnaround', () => {
+  expect(dueDate('Fri Mar 26 2021 16:00:00 GMT+0100 (közép-európai téli idő)', 8)).toBe('Mon Mar 29 2021 16:00:00 GMT+0200 (közép-európai nyári idő)');
+});

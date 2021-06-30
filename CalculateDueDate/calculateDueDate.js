@@ -3,6 +3,7 @@
 const calculateDueDate = (submitDate, turnaroundTime) => {
   let dueDate = new Date(submitDate);
   const hour = 3600000;
+  const day = 24 * hour;
   const turnaroundHours = Math.floor(turnaroundTime);
   const turnaroundMinutes = Math.floor(60 * (turnaroundTime % 1));
   const turnaroundSeconds = Math.floor(3600 * (turnaroundTime % 1 - turnaroundMinutes / 60));
@@ -25,11 +26,12 @@ const calculateDueDate = (submitDate, turnaroundTime) => {
     dueDate.setTime((9 + (remainingTurnaroundTime % 8)) * hour)
 
 
+
   }
   console.log({ sameDay, dueDate, turnaroundHours, turnaroundMinutes, turnaroundSeconds })
   return dueDate.toString();
 }
 
-calculateDueDate('1995-12-18T16:00:00.000Z', 1);
+calculateDueDate('Thu Dec 31 2020 16:00:00 GMT+0100 (közép-európai téli idő)', 20);
 
 module.exports = calculateDueDate;
