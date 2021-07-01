@@ -33,7 +33,7 @@ test('Different week: Submitted in the morning, 16 hours turnaround', () => {
 });
 
 test('Different week: More than a week long project. Submitted in the morning, 48 hours turnaround', () => {
-  expect(dueDate('Fri Jun 25 2021 10:00:00 GMT+0200 (közép-európai nyári idő)', 48)).toBe('Tue Jul 05 2021 10:00:00 GMT+0200 (közép-európai nyári idő)');
+  expect(dueDate('Fri Jun 25 2021 10:00:00 GMT+0200 (közép-európai nyári idő)', 48)).toBe('Mon Jul 05 2021 10:00:00 GMT+0200 (közép-európai nyári idő)');
 });
 
 
@@ -44,7 +44,7 @@ test('Different month: Submitted in the morning, 16 hours turnaround', () => {
 });
 
 test('Different month: Submitted in the morning, 25 hours turnaround', () => {
-  expect(dueDate('Wed Jun 30 2021 10:00:00 GMT+0200 (közép-európai nyári idő)', 25)).toBe('Fri Jul 05 2021 11:00:00 GMT+0200 (közép-európai nyári idő)');
+  expect(dueDate('Wed Jun 30 2021 10:00:00 GMT+0200 (közép-európai nyári idő)', 25)).toBe('Mon Jul 05 2021 11:00:00 GMT+0200 (közép-európai nyári idő)');
 });
 
 //Different year
